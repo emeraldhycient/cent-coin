@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: clarikagrot-medium
+font link: https://www.fontspring.com/fonts/the-refinery/clarika/clarika-grotesque-medium
+font author: The Refinery
+font author site: https://www.refinerybrand.com/
+
+
+icon designer: Alfredo @ IconsAlfredo.com
+icon designer link: /AlfredoCreates
+        
+{"bg-gradient-0":"#01648B","bg-gradient-1":"#5BD0A4","icon":"#ffffff","font":"#ffffff","slogan":"#ffffff"}
+      
