@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     useRouteMatch,
-} from "react-router-dom";
+} from "react-router-dom"
+import axios from 'axios'
 
 import Header from './Header'
 import Subbody from './Subbody'
@@ -10,6 +11,61 @@ import Footer from './Footer'
 
 function Signup() {
     const match = useRouteMatch()
+
+    const [fname, setfname] = useState('')
+    const [username, setusername] = useState('')
+    const [password, setpassword] = useState('')
+    const [cpassword, setcpassword] = useState('')
+    const [email, setemail] = useState('')
+    const [country, setcountry] = useState('')
+    const [plan, setplan] = useState('')
+    const [Currency, setCurrency] = useState('')
+
+    const submitForm = e => {
+        e.preventDefault()
+
+        const formdata = new FormData()
+        formdata.append('fname', fname)
+        formdata.append('username', username)
+        formdata.append('password', password)
+        formdata.append('email', email)
+        formdata.append('country', country)
+        formdata.append('plan', plan)
+        formdata.append('currency', Currency)
+
+        axios({
+            method: 'POST',
+            url: '',
+            data: formdata
+        })
+            .then(e => {
+                console.log(e);
+            })
+            .catch(err => console.error(err))
+
+        return false
+    }
+
+
+    const [pass_error, setpass_error] = useState('')
+
+    const regex = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,})')
+
+    const checkPass = () => {
+        if ((password !== '' || cpassword !== '') && password !== cpassword) {
+            setpass_error('passwords doesnt match')
+        } else {
+            if ((password !== '' || cpassword !== '') && (!regex.test(cpassword) || !regex.test(password))) {
+                setpass_error('password must contain atleast one lower case , one upper case , one special character and one number')
+            } else {
+                setpass_error('')
+            }
+        }
+    }
+
+    useEffect(() => {
+        checkPass()
+    }, [cpassword])
 
     return (
         <>
@@ -41,7 +97,7 @@ function Signup() {
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="basic-addon1"><i className="fa fa-trophy"></i></span>
                                             </div>
-                                            <input type="text" className="form-control" placeholder="your Full name" aria-label="your fullname" aria-describedby="basic-addon1"></input>
+                                            <input type="text" className="form-control" onChange={e => setfname(e.target.value)} value={fname} placeholder="your Full name" aria-label="your fullname" aria-describedby="basic-addon1"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-5">
@@ -49,7 +105,7 @@ function Signup() {
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="basic-addon2"><i className="fa fa-user"></i></span>
                                             </div>
-                                            <input type="text" className="form-control" placeholder="username" aria-label="your username" aria-describedby="basic-addon2"></input>
+                                            <input type="text" className="form-control" onChange={e => setusername(e.target.value)} value={username} placeholder="username" aria-label="your username" aria-describedby="basic-addon2"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -59,15 +115,18 @@ function Signup() {
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="basic-addon1"><i className="fa fa-lock"></i></span>
                                             </div>
-                                            <input type="password" className="form-control" placeholder="Password" aria-label="your password" aria-describedby="basic-addon1"></input>
+                                            <input type="password" onChange={e => setpassword(e.target.value)} value={password} className="form-control" placeholder="Password" aria-label="your password" aria-describedby="basic-addon1"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-5">
+                                        {
+                                            pass_error ? <div className="alert alert-warning" id="pass_error">{pass_error}</div> : ''
+                                        }
                                         <div className="input-group mb-3">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="basic-addon2"><i className="fa fa-lock"></i></span>
                                             </div>
-                                            <input type="password" className="form-control" placeholder="Confirm password" aria-label="your password" aria-describedby="basic-addon2"></input>
+                                            <input type="password" onChange={e => setcpassword(e.target.value)} value={cpassword} className="form-control" placeholder="Confirm password" aria-label="your password" aria-describedby="basic-addon2"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -77,29 +136,21 @@ function Signup() {
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="basic-addon1"><i className="fa fa-envelope"></i></span>
                                             </div>
-                                            <input type="text" className="form-control" placeholder="your email" aria-label="your email" aria-describedby="basic-addon1"></input>
+                                            <input type="text" className="form-control" onChange={e => setemail(e.target.value)} value={email} placeholder="your email" aria-label="your email" aria-describedby="basic-addon1"></input>
                                         </div>
                                     </div>
-                                    <div className="col-md-5">
-                                        <div className="input-group mb-3">
-                                            <div className="input-group-prepend">
-                                                <span className="input-group-text" id="basic-addon1"><i className="fa fa-envelope"></i></span>
-                                            </div>
-                                            <input type="text" className="form-control" placeholder="confirm email" aria-label="your email" aria-describedby="basic-addon1"></input>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="row">
                                     <div className="col-md-5">
                                         <div className="input-group mb-3">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="basic-addon1"><i className="fa fa-flag"></i></span>
                                             </div>
-                                            <input type="text" className="form-control" placeholder="Enter Country" aria-label="enter country" aria-describedby="basic-addon1"></input>
+                                            <input type="text" onChange={e => setcountry(e.target.value)} value={country} className="form-control" placeholder="Enter Country" aria-label="enter country" aria-describedby="basic-addon1"></input>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="row">
                                     <div className="col-md-5">
-                                        <select className="form-control">
+                                        <select className="form-control" onChange={e => setplan(e.target.value)} value={plan} required>
                                             <option>Select Investment Plan</option>
                                             <option value="basic">Basic plan</option>
                                             <option value="silver ">Silver plan</option>
@@ -107,10 +158,8 @@ function Signup() {
                                             <option value="promo ">Promo plan</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div className="row">
                                     <div className="col-md-5">
-                                        <select className="form-control">
+                                        <select className="form-control" onChange={e => setCurrency(e.target.value)} value={Currency} required>
                                             <option>Select Your Currency</option>
                                             <option value="usd">&#36; Usd</option>
                                             <option value="euro ">&euro; Eur</option>
@@ -119,7 +168,8 @@ function Signup() {
                                         </select>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary text-white float-right m-2"><a href="/dashboard/" className="text-white">Register</a></button>
+
+                                <button className="btn btn-primary text-white float-right m-2" onClick={submitForm}><a href="/dashboard/" className="text-white">Register</a></button>
                             </form>
                         </div>
                     </div>

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     useRouteMatch,
 } from "react-router-dom";
+import axios from 'axios'
+
+
 
 import Header from './Header'
 import Subbody from './Subbody'
@@ -10,6 +13,29 @@ import Footer from './Footer'
 
 function Login() {
     const match = useRouteMatch()
+
+    const [email, setemail] = useState('')
+    const [password, setpassword] = useState('')
+
+    const submitForm = e => {
+        e.preventDefault()
+
+        const formdata = new FormData()
+        formdata.append('email', email)
+        formdata.append('password', password)
+
+        axios({
+            method: 'POST',
+            url: '',
+            data: formdata
+        })
+            .then(e => {
+                console.log(e);
+            })
+            .catch(err => console.error(err))
+
+        return false
+    }
 
     return (
         <>
@@ -39,15 +65,15 @@ function Login() {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text" id="basic-addon1"><i className="fa fa-envelope"></i></span>
                                     </div>
-                                    <input type="text" className="form-control" placeholder="your email" aria-label="your email" aria-describedby="basic-addon1"></input>
+                                    <input type="text" onChange={e => setemail(e.target.value)} value={email} className="form-control" placeholder="your email" aria-label="your email" aria-describedby="basic-addon1" required />
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text" id="basic-addon2"><i className="fa fa-lock"></i></span>
                                     </div>
-                                    <input type="password" className="form-control" placeholder="password" aria-label="your password" aria-describedby="basic-addon2"></input>
+                                    <input type="password" onChange={e => setpassword(e.target.value)} value={password} className="form-control" placeholder="password" aria-label="your password" aria-describedby="basic-addon2" required />
                                 </div>
-                                <button className="btn btn-primary text-white float-right m-2"><a href="/dashboard/" className="text-white">Login</a></button>
+                                <button onClick={submitForm} className="btn btn-primary text-white float-right m-2"><a href="/dashboard/" className="text-white">Login</a></button>
                             </form>
                         </div>
                     </div>

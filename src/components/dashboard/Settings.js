@@ -3,6 +3,8 @@ import { useAtom } from 'jotai'
 import {
     useRouteMatch,
 } from "react-router-dom"
+import axios from 'axios'
+
 
 import Sidebar from './Sidebar'
 import Body from './Body'
@@ -40,6 +42,16 @@ function Settings() {
         formdata.append('username', username)
         formdata.append('email', email)
         formdata.append('phone', phone)
+
+        axios({
+            method: 'POST',
+            url: '',
+            data: formdata
+        })
+            .then(e => {
+                console.log(e);
+            })
+            .catch(err => console.error(err))
 
         return false
     }
