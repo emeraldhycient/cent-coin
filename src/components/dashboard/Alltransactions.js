@@ -10,7 +10,7 @@ import Transactions from './Transactions'
 import Charts from './Charts'
 
 
-import sidebarData from './sidebarData'
+import { sidebarData } from './sidebarData'
 
 
 function Alltransactions() {

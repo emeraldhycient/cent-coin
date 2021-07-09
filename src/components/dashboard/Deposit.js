@@ -4,7 +4,7 @@ import {
     useRouteMatch,
 } from 'react-router-dom'
 
-import sidebarData from './sidebarData'
+import { sidebarData } from './sidebarData'
 
 
 import Sidebar from './Sidebar'

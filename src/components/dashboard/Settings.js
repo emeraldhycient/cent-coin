@@ -9,7 +9,7 @@ import axios from 'axios'
 import Sidebar from './Sidebar'
 import Body from './Body'
 
-import sidebarData from './sidebarData'
+import { sidebarData } from './sidebarData'
 
 
 function Settings() {

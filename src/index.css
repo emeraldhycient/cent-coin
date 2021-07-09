@@ -87,6 +87,7 @@ hr {
     width: 12%;
     background-color: black;
     padding-top: 55px;
+    overflow-y: auto;
 }
 
 .sidebar a {
