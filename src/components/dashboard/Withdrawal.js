@@ -46,7 +46,7 @@ function Withdrawal() {
                                     <h5 className="ml-2 text-dark">Withdraw</h5>
                                     <div style={{ width: '100%', height: '1px', backgroundColor: '#cacaca' }}></div>
                                     <form action="" className="form-group">
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">Bank Name</h6>
                                                 <small className="text-muted">Please input the correct bank name</small>
@@ -61,7 +61,7 @@ function Withdrawal() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-2">
+                                        <div className="row ml-md-5 mt-2">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">Account Name</h6>
                                                 <small className="text-muted">Please double check account name</small>
@@ -76,7 +76,7 @@ function Withdrawal() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-2">
+                                        <div className="row ml-md-5 mt-2">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">Account Number</h6>
                                                 <small className="text-muted">Please double check this account number</small>
@@ -91,7 +91,7 @@ function Withdrawal() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-2">
+                                        <div className="row ml-md-5 mt-2">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">Amount </h6>
                                                 <small className="text-muted">Maximum amount withdrawable: 0</small>

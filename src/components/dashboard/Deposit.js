@@ -55,7 +55,7 @@ function Deposit() {
                                     <div style={{ width: '100%', height: '1px', backgroundColor: '#cacaca' }}></div>
                                     <form action="" className="form-group">
                                         <h6 className="text-center text-dark mt-3 ">Choose a payment method that works for you</h6>
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">BitCoin</h6>
                                                 <small className="text-muted">click copy to copy the value of the field</small>
@@ -70,7 +70,7 @@ function Deposit() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">Ethereum</h6>
                                                 <small className="text-muted">click copy to copy the value of the field</small>
@@ -85,7 +85,7 @@ function Deposit() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">LiteCoin</h6>
                                                 <small className="text-muted">click copy to copy the value of the field</small>
@@ -100,7 +100,7 @@ function Deposit() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">paypal</h6>
                                                 <small className="text-muted">click copy to copy the value of the field</small>
@@ -115,7 +115,7 @@ function Deposit() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">venmo</h6>
                                                 <small className="text-muted">click copy to copy the value of the field</small>
@@ -130,7 +130,7 @@ function Deposit() {
                                             </div>
                                         </div>
 
-                                        <div className="row ml-5 mt-5">
+                                        <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
                                                 <h6 className="text-muted">Zelle</h6>
                                                 <small className="text-muted">click copy to copy the value of the field</small>

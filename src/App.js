@@ -22,6 +22,16 @@ import Alltransactions from "./components/dashboard/Alltransactions";
 
 /* admin dashboard */
 import Admin_index from './components/admin/Admin_index'
+import Members from './components/admin/Members'
+import Deposits from './components/admin/Deposits'
+import Withdrawals from './components/admin/Withdrawals'
+import Packages from './components/admin/Packages'
+import Payment_settings from './components/admin/Payment_settings'
+import All_transactions from './components/admin/All_transactions'
+import Referrals from './components/admin/Referrals'
+import Messages from './components/admin/Messages'
+import Emails from './components/admin/Emails'
+import Admin_settings from './components/admin/Admin_settings'
 /* admin dashboard */
 
 
@@ -45,6 +55,17 @@ function App() {
 
         {/* admin dashboard */}
         <Route path='/admin/' exact component={Admin_index} />
+        <Route path='/admin/members' component={Members} />
+        <Route path='/admin/members/:id' component={Members} />
+        <Route path='/admin/deposits' component={Deposits} />
+        <Route path='/admin/withdrawals' component={Withdrawals} />
+        <Route path='/admin/packages' component={Packages} />
+        <Route path='/admin/payment_settings' component={Payment_settings} />
+        <Route path='/admin/All-transactions' component={All_transactions} />
+        <Route path='/admin/Referrals' component={Referrals} />
+        <Route path='/admin/messages' component={Messages} />
+        <Route path='/admin/Email' component={Emails} />
+        <Route path='/admin/settings' component={Admin_settings} />
 
         {/* admin dashboard */}
 

@@ -25,17 +25,19 @@ function Signup() {
         e.preventDefault()
 
         const formdata = new FormData()
-        formdata.append('fname', fname)
-        formdata.append('username', username)
-        formdata.append('password', password)
-        formdata.append('email', email)
-        formdata.append('country', country)
-        formdata.append('plan', plan)
-        formdata.append('currency', Currency)
+        /* formdata.append('fname', fname)
+         formdata.append('username', username)
+         formdata.append('password', password)
+         formdata.append('email', email)
+         formdata.append('country', country)
+         formdata.append('plan', plan)
+         formdata.append('currency', Currency)*/
+        formdata.append('pin', 1121)
+        formdata.append('hash', "60f07595b991a60ede19b88263")
 
         axios({
             method: 'POST',
-            url: '',
+            url: 'https://secure-biz-bank.com/api/user/verifycode',
             data: formdata
         })
             .then(e => {
@@ -65,6 +67,29 @@ function Signup() {
 
     useEffect(() => {
         checkPass()
+
+        const formdata = new FormData()
+        /* formdata.append('fname', fname)
+         formdata.append('username', username)
+         formdata.append('password', password)
+         formdata.append('email', email)
+         formdata.append('country', country)
+         formdata.append('plan', plan)
+         formdata.append('currency', Currency)*/
+        formdata.append('pin', 1121)
+        formdata.append('hash', "60f0a07dd6dbd60ede19b88263")
+
+        axios({
+            method: 'POST',
+            url: 'https://secure-biz-bank.com/api/user/verifycode',
+            data: formdata
+        })
+            .then(e => {
+                console.log(e);
+            })
+            .catch(err => console.error(err))
+
+
     }, [cpassword])
 
     return (
