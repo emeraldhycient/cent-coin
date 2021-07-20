@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
 import {
     useLocation, withRouter
@@ -8,11 +8,15 @@ import {
 import { Admin_sidebardata } from '../dashboard/sidebarData'
 import Sidebar from './Sidebar'
 import Body from './Body'
+import axios from 'axios'
 
 
 function Members() {
 
     const [sidebars, setsidebar] = useAtom(Admin_sidebardata)
+
+    const [users, setusers] = useState()
+    const [updatestatus, setupdatestatus] = useState('')
 
     const isActive = index => {
         setsidebar(
@@ -33,6 +37,20 @@ function Members() {
         alert(id)
     }
 
+    const handleChangeStatus = () => {
+
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/users.php')
+            .then(res => {
+                let mod = Object.values(res.data.data.users)
+                setusers(mod)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
 
     return (
         <>
@@ -48,96 +66,62 @@ function Members() {
                                 <div className="col-md-11 ml-auto mr-auto mt-4 mb-5 shadow bg-white pt-2">
                                     <h5 className="ml-2 text-dark">Members Details</h5>
                                     <div style={{ width: '100%', height: '1px', backgroundColor: '#cacaca' }}></div>
-                                    <div className="table-responsive">
-                                        <table className="table table-striped">
+                                    <div className="table-responsive mt-5">
+                                        <table className="table table-hover table-striped table-bordered">
                                             <tbody>
                                                 <tr>
                                                     <th className="text-dark">userid</th>
                                                     <th className="text-dark">Username</th>
+                                                    <th className="text-dark">email</th>
+                                                    <th className="text-dark">password</th>
+                                                    <th className="text-dark">plans</th>
+                                                    <th className="text-dark">currency</th>
                                                     <th className="text-dark">Reg.Date</th>
-                                                    <th className="text-dark">status</th>
-                                                    <th className="text-dark">Active Deposits</th>
                                                     <th className="text-dark">Earnings</th>
+                                                    <th className="text-dark">status</th>
                                                     <th className="text-primary">Edit Status<i className="fa fa-edit ml-1"></i></th>
                                                     <th className="text-danger">Delete<i className="fa fa-trash"></i></th>
                                                 </tr>
-                                                <tr>
-                                                    <td><h6>60edf1cf84988</h6></td>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0">emmanuel emma</small>
-                                                    </td>
-                                                    <td><h6>24/5/2021</h6></td>
-                                                    <td>Active</td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>
-                                                        <form action="" className="form-group">
-                                                            <input type="hidden" id="memberid" value='1' />
-                                                            <select name="" id="" className="opt-group">
-                                                                <option value="suspened">Suspend</option>
-                                                                <option value="Active">Activate</option>
-                                                            </select>
-                                                            <button className="btn badge badge-primary ml-1"> Update</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <button className=" btn badge badge-danger" onClick={e => handleDelete(1)}>Delete</button>
-                                                    </td>
-                                                </tr>
+                                                {
+                                                    users ?
+                                                        users.map((item, i) => (
+                                                            <tr key={i}>
+                                                                <td><h6>{item.userid}</h6></td>
+                                                                <td>
+                                                                    <h5 className="mb-0">{item.username}</h5>
+                                                                    <small className="mt-0">{item.fullname}</small>
+                                                                </td>
+                                                                <td>{item.email}</td>
+                                                                {
+                                                                    item.isadmin ? <td>admin password hidden</td> : <td>{item.password}</td>
+                                                                }
 
-                                                <tr>
-                                                    <td><h6>70edf1cf84989</h6></td>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0">emmanuel emma</small>
-                                                    </td>
-                                                    <td><h6>24/5/2021</h6></td>
-                                                    <td>Active</td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>
-                                                        <form action="" className="form-group">
-                                                            <input type="hidden" id="memberid" value='1' />
-                                                            <select name="" id="" className="opt-group">
-                                                                <option value="suspened">Suspend</option>
-                                                                <option value="Active">Activate</option>
-                                                            </select>
-                                                            <button className="btn badge badge-primary ml-1"> Update</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <button className=" btn badge badge-danger" onClick={e => handleDelete(2)}>Delete</button>
-                                                    </td>
-                                                </tr>
+                                                                <td>{item.plan}</td>
+                                                                <td>{item.currency}</td>
 
+                                                                <td><i className="fa fa-hourglass-half mr-1"></i><h6>{item.createdAt}</h6></td>
+                                                                <td><i className="fa fa-dollar mr-1"></i>{item.accountbalance}</td>
+                                                                <td>{item.status}</td>
+                                                                <td>
+                                                                    <form action="" className="form-group" onSubmit={handleChangeStatus}>
+                                                                        <input type="hidden" id="memberid" value={item.userid} />
+                                                                        <select name="" id="" className="opt-group" value={updatestatus} onChange={e => setupdatestatus(e.target.value)}>
+                                                                            <option value="suspened">Suspend</option>
+                                                                            <option value="Active">Activate</option>
+                                                                        </select>
+                                                                        <button className="btn badge badge-primary ml-1" type='submit'> Update</button>
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <button className=" btn badge badge-danger" onClick={e => handleDelete(item.userid)}>Delete</button>
+                                                                </td>
+                                                            </tr>
 
-                                                <tr>
-                                                    <td><h6>60edf1cf84988</h6></td>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0">emmanuel emma</small>
-                                                    </td>
-                                                    <td><h6>24/5/2021</h6></td>
-                                                    <td>Active</td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>
-                                                        <form action="" className="form-group">
-                                                            <input type="hidden" id="memberid" value='1' />
-                                                            <select name="" id="" className="opt-group">
-                                                                <option value="suspened">Suspend</option>
-                                                                <option value="Active">Activate</option>
-                                                            </select>
-                                                            <button className="btn badge badge-primary ml-1"> Update</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <button className=" btn badge badge-danger" onClick={e => handleDelete(3)}>Delete</button>
-                                                    </td>
-                                                </tr>
-
-
+                                                        )) :
+                                                        <tr>
+                                                            <td>no data found</td>
+                                                        </tr>
+                                                }
 
                                             </tbody>
                                         </table>

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import CountUp from 'react-countup';
+import axios from 'axios'
 
 
 import Header from "./Header"
@@ -13,6 +14,41 @@ import moneyex from "../images/money-exchange.png"
 import trade from "../images/trade.png"
 
 function Index() {
+    const [plans, setplans] = useState([])
+    let modplan = Object.values(plans)
+
+
+    const Packages = () => {
+        return (modplan.map((item, i) => (
+            <div className="col-md-3 mb-4" key={i}>
+                <center>
+                    <img src={moneyex} alt="" className="planimg mb-4" />
+                    <div className="text-white">
+                        <h2>{item.plan}</h2>
+                        <h4>{item.duration} DAYS ({item.percentage}%)</h4>
+                        <hr />
+                    </div>
+                    <div className="text-white mt-5">
+                        <h6>Min Dep : ${item.mindep}</h6>
+                        <h6>Max Dep : ${item.maxdep}</h6>
+                    </div>
+                </center>
+            </div>
+        ))
+        )
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/packages.php?all=all')
+            .then(res => {
+                setplans(res.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }, [])
+
     return (
         <>
             <Header />
@@ -83,63 +119,7 @@ function Index() {
                 </center>
                 <div className="container pt-5 " data-aos="flip-down" data-aos-duration="3000" id="blur" style={{ borderRadius: '7px' }}>
                     <div className="row">
-                        <div className="col-md-3 mb-4">
-                            <center>
-                                <img src={bitcoin} alt="" className="planimg mb-4" />
-                                <div className="text-white">
-                                    <h2>BASIC PLAN</h2>
-                                    <h4>2 DAYS (4.5%)</h4>
-                                    <hr />
-                                </div>
-                                <div className="text-white mt-5">
-                                    <h6>Min Dep : $50</h6>
-                                    <h6>Max Dep : $1,000</h6>
-                                </div>
-                            </center>
-
-                        </div>
-                        <div className="col-md-3 mb-4">
-                            <center>
-                                <img src={key} alt="" className="planimg mb-4" />
-                                <div className="text-white">
-                                    <h2>SILVER PLAN</h2>
-                                    <h4>4 DAYS (6.8%)</h4>
-                                    <hr />
-                                </div>
-                                <div className="text-white mt-5">
-                                    <h6>Min Dep : $1,000</h6>
-                                    <h6>Max Dep : $5,000</h6>
-                                </div>
-                            </center>
-                        </div>
-                        <div className="col-md-3 mb-4">
-                            <center>
-                                <img src={moneyex} alt="" className="planimg mb-4" />
-                                <div className="text-white">
-                                    <h2>DEPOSIT PLAN</h2>
-                                    <h4>5 DAYS (10%)</h4>
-                                    <hr />
-                                </div>
-                                <div className="text-white mt-5">
-                                    <h6>Min Dep : $5,000</h6>
-                                    <h6>Max Dep : unlimited</h6>
-                                </div>
-                            </center>
-                        </div>
-                        <div className="col-md-3 mb-4">
-                            <center>
-                                <img src={trade} alt="" className="planimg mb-4" />
-                                <div className="text-white">
-                                    <h2>PROMO PLAN</h2>
-                                    <h4>2 DAYS (250%)</h4>
-                                    <hr />
-                                </div>
-                                <div className="text-white mt-5">
-                                    <h6>Min Dep : $300</h6>
-                                    <h6>Max Dep : unlimited</h6>
-                                </div>
-                            </center>
-                        </div>
+                        <Packages />
                     </div>
                 </div>
             </section>

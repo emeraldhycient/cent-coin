@@ -14,6 +14,8 @@
         "react-dom": "^17.0.2",
         "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
+        "react-toastify": "^7.0.4",
+        "recharts": "^2.0.10",
         "typed.js": "^2.0.12",
         "web-vitals": "^1.0.1"
     },

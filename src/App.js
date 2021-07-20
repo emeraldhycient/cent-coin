@@ -5,6 +5,9 @@ import {
   Route
 } from "react-router-dom"
 
+import ProtectedRoutes from "./components/auth/ProtectedRoute";
+import Protectadmin from "./components/auth/Protectadmin";
+
 import Index from "./components/index";
 import About from "./components/About";
 import Faq from "./components/Faq";
@@ -27,7 +30,6 @@ import Deposits from './components/admin/Deposits'
 import Withdrawals from './components/admin/Withdrawals'
 import Packages from './components/admin/Packages'
 import Payment_settings from './components/admin/Payment_settings'
-import All_transactions from './components/admin/All_transactions'
 import Referrals from './components/admin/Referrals'
 import Messages from './components/admin/Messages'
 import Emails from './components/admin/Emails'
@@ -46,26 +48,25 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {/* user dashboard */}
-        <Route path="/dashboard/" exact component={Home} />
-        <Route path="/dashboard/deposit" component={Deposit} />
-        <Route path="/dashboard/withdraw" component={Withdrawal} />
-        <Route path="/dashboard/All-transactions" component={Alltransactions} />
-        <Route path="/dashboard/settings" component={Settings} />
+        <ProtectedRoutes path="/dashboard/" exact component={Home} />
+        <ProtectedRoutes path="/dashboard/deposit" component={Deposit} />
+        <ProtectedRoutes path="/dashboard/withdraw" component={Withdrawal} />
+        <ProtectedRoutes path="/dashboard/All-transactions" component={Alltransactions} />
+        <ProtectedRoutes path="/dashboard/settings" component={Settings} />
         {/* user dashboard */}
 
         {/* admin dashboard */}
-        <Route path='/admin/' exact component={Admin_index} />
-        <Route path='/admin/members' component={Members} />
-        <Route path='/admin/members/:id' component={Members} />
-        <Route path='/admin/deposits' component={Deposits} />
-        <Route path='/admin/withdrawals' component={Withdrawals} />
-        <Route path='/admin/packages' component={Packages} />
-        <Route path='/admin/payment_settings' component={Payment_settings} />
-        <Route path='/admin/All-transactions' component={All_transactions} />
-        <Route path='/admin/Referrals' component={Referrals} />
-        <Route path='/admin/messages' component={Messages} />
-        <Route path='/admin/Email' component={Emails} />
-        <Route path='/admin/settings' component={Admin_settings} />
+        <Protectadmin path='/admin/' exact component={Admin_index} />
+        <Protectadmin path='/admin/members' component={Members} />
+        <Protectadmin path='/admin/members/:id' component={Members} />
+        <Protectadmin path='/admin/deposits' component={Deposits} />
+        <Protectadmin path='/admin/withdrawals' component={Withdrawals} />
+        <Protectadmin path='/admin/packages' component={Packages} />
+        <Protectadmin path='/admin/payment_settings' component={Payment_settings} />
+        <Protectadmin path='/admin/Referrals' component={Referrals} />
+        <Protectadmin path='/admin/messages' component={Messages} />
+        <Protectadmin path='/admin/Email' component={Emails} />
+        <Protectadmin path='/admin/settings' component={Admin_settings} />
 
         {/* admin dashboard */}
 

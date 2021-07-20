@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import {
-    useRouteMatch,
+    useRouteMatch, useHistory
 } from "react-router-dom";
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -11,8 +13,30 @@ import Subbody from './Subbody'
 import HeroSection from './HeroSection';
 import Footer from './Footer'
 
+import loading from './../images/Ripple-1s-200px.gif'
+
+
 function Login() {
     const match = useRouteMatch()
+
+    let history = useHistory();
+
+    const notify = (message) => toast(`🦄 ${message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+
+    const [isloading, setisloading] = useState(false)
+
+    const toggleloading = () => {
+        setisloading(e => !e);
+    }
 
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
@@ -24,15 +48,43 @@ function Login() {
         formdata.append('email', email)
         formdata.append('password', password)
 
+        toggleloading()
+
         axios({
             method: 'POST',
-            url: ' https://secure-biz-bank.com/api/user/login',
+            url: ' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/auth/login.php',
             data: formdata
         })
-            .then(e => {
-                console.log(e);
+            .then(res => {
+                if (res.data.data.user.isadmin) {
+                    notify(res.data.message)
+                    sessionStorage.setItem('admindata', res.data.data.user)
+                    sessionStorage.setItem('admin', res.data.data.user.userid)
+                    sessionStorage.setItem('username', res.data.data.user.username)
+                    sessionStorage.setItem('email', res.data.data.user.email)
+                    sessionStorage.setItem('hashadmin', res.data.data.hash)
+                    setTimeout(() => {
+                        history.push('/admin/')
+                    }, 600);
+                } else {
+                    notify(res.data.message)
+                    sessionStorage.setItem('userdata', res.data.data.user)
+                    sessionStorage.setItem('user', res.data.data.user.userid)
+                    sessionStorage.setItem('username', res.data.data.user.username)
+                    sessionStorage.setItem('hashuser', res.data.data.hash)
+                    setTimeout(() => {
+                        history.push('/dashboard/')
+                    }, 600);
+                }
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                notify(err.response.data.message)
+            })
+            .finally(e => {
+                setTimeout(() => {
+                    toggleloading()
+                }, 1000)
+            })
 
         return false
     }
@@ -53,9 +105,20 @@ function Login() {
                     </div>
                 </center>
             </HeroSection>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <Subbody>
                 <div className="container">
-                    <div className="row">
+                    <div className="row m-3">
                         <div className="col-md-6 m-auto bg-light shadow pt-3">
                             <center>
                                 <h2 className="text-primary">Login</h2>
@@ -73,8 +136,11 @@ function Login() {
                                     </div>
                                     <input type="password" onChange={e => setpassword(e.target.value)} value={password} className="form-control" placeholder="password" aria-label="your password" aria-describedby="basic-addon2" required />
                                 </div>
-                                <button onClick={submitForm} className="btn btn-primary text-white float-right m-2"><a href="/dashboard/" className="text-white">Login</a></button>
+                                {
+                                    isloading ? <button className="btn btn-primary text-white float-right m-2"><img src={loading} style={{ width: '30px', height: '30px' }} alt="" /> Login</button> : <button onClick={submitForm} className="btn btn-primary text-white float-right m-2">Login</button>
+                                }
                             </form>
+                            <a href="./signup">not a member yet , signup</a>
                         </div>
                     </div>
                 </div>

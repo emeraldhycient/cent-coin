@@ -1,15 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import { Admin_sidebardata } from '../dashboard/sidebarData'
 import Sidebar from './Sidebar'
 import Body from './Body'
+import loading from '../../images/Ripple-1s-200px.gif'
+import axios from 'axios';
+
 
 
 function Withdrawal() {
 
+    const [withdrawals, setwithdrawals] = useState('')
+    const [unprocessed, setunprocessed] = useState('')
     const [sidebars, setsidebar] = useAtom(Admin_sidebardata)
+
+    const notify = (message) => toast(`🦄 ${message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     const isActive = index => {
         setsidebar(
@@ -24,9 +41,48 @@ function Withdrawal() {
         )
     }
 
-    const processWithdrawal = i => {
-        alert(i)
+    const [isloading, setisloading] = useState(false)
+
+    const toggleloading = () => {
+        setisloading(e => !e);
     }
+
+
+    const processWithdrawal = (i, amount) => {
+        let formdata = new FormData();
+        formdata.append('update', 'update')
+        formdata.append('userid', i)
+        formdata.append('amount', amount)
+        formdata.append('status', 'processed')
+        axios({
+            method: 'POST',
+            url: 'http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/withdrawal.php',
+            data: formdata
+        })
+            .then(res => {
+                notify(res.data.message)
+            })
+            .catch(err => {
+                notify(err.response.data.message)
+            })
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/withdrawal.php?all=all')
+            .then(res => {
+                let mod = Object.values(res.data.data.withdrawal)
+                setwithdrawals(mod)
+            })
+            .catch(err => notify(err.response.data.message))
+
+        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/withdrawal.php?unprocessed=all')
+            .then(res => {
+                let mod = Object.values(res.data.data.withdrawal)
+                setunprocessed(mod)
+            })
+            .catch(err => notify(err.response.data.message))
+
+    }, [])
 
     return (
         <>
@@ -34,6 +90,17 @@ function Withdrawal() {
                 <div className="sidebar">
                     <Sidebar sidebars={sidebars} isActive={isActive} />
                 </div>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <div className="maincontent">
                     <Body>
 
@@ -42,46 +109,41 @@ function Withdrawal() {
                                 <div className="col-md-11 ml-auto mr-auto mt-4 mb-5 shadow bg-white pt-2">
                                     <h5 className="ml-2 text-dark">Withdrawal Request</h5>
                                     <div style={{ width: '100%', height: '1px', backgroundColor: '#cacaca' }}></div>
-                                    <div className="table-responsive">
-                                        <table className="table table-striped">
+                                    <div className="table-responsive mt-3">
+                                        <table className="table table-striped table-hover">
                                             <tbody>
                                                 <tr>
-                                                    <th className="text-dark">Username</th>
-                                                    <th className="text-dark">Amount</th>
-                                                    <th className="text-dark">Date</th>
-                                                    <th className="text-dark">Action</th>
+                                                    <th className="text-dark">userid</th>
+                                                    <th className="text-dark">bankname</th>
+                                                    <th className="text-dark">routing</th>
+                                                    <th className="text-dark">account-name</th>
+                                                    <th className="text-dark">account-number</th>
+                                                    <th className="text-dark">amount</th>
+                                                    <th className="text-dark">date</th>
+                                                    <th className="text-dark">action</th>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0"><b>id: </b> j1f23se</small>
-                                                    </td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>42/12/2021</td>
-                                                    <td><button className="btn btn-sm btn-success text-white" onClick={e => processWithdrawal(1)}>Process</button></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0"><b>id: </b> j1f23se</small>
-                                                    </td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>42/12/2021</td>
-                                                    <td><button className="btn btn-sm btn-success text-white" onClick={e => processWithdrawal(2)}>Process</button></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0"><b>id: </b> j1f23se</small>
-                                                    </td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>42/12/2021</td>
-                                                    <td><button className="btn btn-sm btn-success text-white" onClick={e => processWithdrawal(3)}>Process</button></td>
-                                                </tr>
-
+                                                {
+                                                    unprocessed ?
+                                                        unprocessed.map((withdrawal, i) => (
+                                                            <tr key={i}>
+                                                                <td>
+                                                                    <h5 className="mb-0">{withdrawal.userid}</h5>
+                                                                </td>
+                                                                <td>{withdrawal.bankname}</td>
+                                                                <td>{withdrawal.routing}</td>
+                                                                <td>{withdrawal.accountname}</td>
+                                                                <td>{withdrawal.accountnumber}</td>
+                                                                <td><i className="fa fa-dollar mr-1"></i>{withdrawal.amount}</td>
+                                                                <td>{withdrawal.createdAt}</td>
+                                                                <td><span className="badge badge-success" onClick={e => processWithdrawal(withdrawal.userid, withdrawal.amount)}>Process</span></td>
+                                                            </tr>
+                                                        ))
+                                                        :
+                                                        <tr>
+                                                            <td>no data to be displayed</td>
+                                                        </tr>
+                                                }
 
                                             </tbody>
                                         </table>
@@ -95,46 +157,40 @@ function Withdrawal() {
                                 <div className="col-md-11 ml-auto mr-auto mt-4 mb-5 shadow bg-white pt-2">
                                     <h5 className="ml-2 text-dark">Withdrawal History</h5>
                                     <div style={{ width: '100%', height: '1px', backgroundColor: '#cacaca' }}></div>
-                                    <div className="table-responsive">
-                                        <table className="table table-striped">
+                                    <div className="table-responsive mt-3">
+                                        <table className="table table-striped table-hover">
                                             <tbody>
                                                 <tr>
-                                                    <th className="text-dark">Username</th>
-                                                    <th className="text-dark">Amount</th>
-                                                    <th className="text-dark">Date</th>
-                                                    <th className="text-dark">Status</th>
+                                                    <th className="text-dark">userid</th>
+                                                    <th className="text-dark">bankname</th>
+                                                    <th className="text-dark">routing</th>
+                                                    <th className="text-dark">account-name</th>
+                                                    <th className="text-dark">account-number</th>
+                                                    <th className="text-dark">amount</th>
+                                                    <th className="text-dark">status</th>
+                                                    <th className="text-dark">date</th>
                                                 </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0"><b>id: </b> j1f23se</small>
-                                                    </td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>23/12/2033</td>
-                                                    <td><span className="badge badge-primary">Proccessed</span></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0"><b>id: </b> j1f23se</small>
-                                                    </td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>23/12/2033</td>
-                                                    <td><span className="badge badge-warning text-white">pending</span></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="mb-0">emerald</h5>
-                                                        <small className="mt-0"><b>id: </b> j1f23se</small>
-                                                    </td>
-                                                    <td><i className="fa fa-dollar mr-1"></i>2300.00</td>
-                                                    <td>23/12/2033</td>
-                                                    <td><span className="badge badge-primary">Proccessed</span></td>
-                                                </tr>
-
+                                                {
+                                                    withdrawals ?
+                                                        withdrawals.map((withdrawal, i) => (
+                                                            <tr key={i}>
+                                                                <td>
+                                                                    <h5 className="mb-0">{withdrawal.userid}</h5>
+                                                                </td>
+                                                                <td>{withdrawal.bankname}</td>
+                                                                <td>{withdrawal.routing}</td>
+                                                                <td>{withdrawal.accountname}</td>
+                                                                <td>{withdrawal.accountnumber}</td>
+                                                                <td><i className="fa fa-dollar mr-1"></i>{withdrawal.amount}</td>
+                                                                <td><span className="badge badge-primary">{withdrawal.status}</span></td>
+                                                                <td>{withdrawal.createdAt}</td>
+                                                            </tr>
+                                                        ))
+                                                        :
+                                                        <tr>
+                                                            <td>no data to be displayed</td>
+                                                        </tr>
+                                                }
 
                                             </tbody>
                                         </table>
