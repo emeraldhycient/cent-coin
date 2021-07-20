@@ -30,10 +30,10 @@ export default function Header() {
                             <h6 className="nav-link"><Link to="./faq" className="text-white" >Faq</Link></h6>
                         </li>
                         <li className="nav-item">
-                            <h6 className="nav-link "><Link to="./signup" className=" btn btn-sm btn-warning text-white">signup</Link></h6>
+                            <h6 className="nav-link "><Link to="./signup" className="text-primary">Register</Link></h6>
                         </li>
                         <li className="nav-item">
-                            <h6 className="nav-link "><Link to="./login" className=" btn btn-sm btn-danger text-white">Login</Link></h6>
+                            <h6 className="nav-link "><Link to="./login" className="text-success">Dashboard</Link></h6>
                         </li>
                     </ul>
                 </div>

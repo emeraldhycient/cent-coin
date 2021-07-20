@@ -15,7 +15,7 @@ import loading from './../images/Ripple-1s-200px.gif'
 
 function Contact() {
     const match = useRouteMatch()
-    const placeName = 'Unit 4 Whickham Ind Est, Newcastle Upon Tyne, NE16 3DA '
+    const placeName = 'Route 344 Wisconsin Avenue, Washington Dc, USA'
 
     const [isloading, setisloading] = useState(false)
 
