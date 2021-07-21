@@ -117,15 +117,15 @@ function Withdrawal() {
                                     <form action="" className="form-group" onSubmit={Withdraw}>
                                         <div className="row ml-md-5 mt-5">
                                             <div className="col-md-4">
-                                                <h6 className="text-muted">Bank Name</h6>
-                                                <small className="text-muted">Please input the correct bank name</small>
+                                                <h6 className="text-muted">Bitcoin wallet address</h6>
+                                                <small className="text-muted">Bitcoin wallet address</small>
                                             </div>
                                             <div className="col-md-7">
                                                 <div className="input-group mb-4">
                                                     <div className="input-group-prepend">
                                                         <span className="input-group-text bg-dark" id="basic-addon1"><i className="fa fa-university text-white"></i></span>
                                                     </div>
-                                                    <input type="text" className="form-control" onChange={e => setwallet(e.target.value)} value={wallet} placeholder="Bank Name" aria-label="Bank Name" aria-describedby="basic-addon1" required />
+                                                    <input type="text" className="form-control" onChange={e => setwallet(e.target.value)} value={wallet} placeholder="Bitcoin wallet address" aria-label="Bank Name" aria-describedby="basic-addon1" required />
                                                 </div>
                                             </div>
                                         </div>

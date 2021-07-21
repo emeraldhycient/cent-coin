@@ -48,7 +48,8 @@ function App() {
         <Route path="/faq" component={Faq} />
         <Route path="/contact" component={Contact} />
         <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signup/:referralid" component={Signup} />
         {/* user dashboard */}
         <ProtectedRoutes path="/dashboard/" exact component={Home} />
         <ProtectedRoutes path="/dashboard/deposit" component={Deposit} />

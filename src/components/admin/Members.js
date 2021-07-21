@@ -122,6 +122,7 @@ function Members() {
                                                     <th className="text-dark">Reg.Date</th>
                                                     <th className="text-dark">Earnings</th>
                                                     <th className="text-dark">status</th>
+                                                    <th className="text-dark">referredby</th>
                                                     <th className="text-primary">Edit user<i className="fa fa-edit ml-1"></i></th>
                                                     <th className="text-danger">Delete<i className="fa fa-trash"></i></th>
                                                 </tr>
@@ -145,6 +146,7 @@ function Members() {
                                                                 <td><i className="fa fa-hourglass-half mr-1"></i><h6>{item.createdAt}</h6></td>
                                                                 <td><i className="fa fa-dollar mr-1"></i>{item.accountbalance}</td>
                                                                 <td>{item.status}</td>
+                                                                <td>{item.referredby}</td>
                                                                 <td>
                                                                     <button className=" btn badge badge-primary"><Link to={`${location.pathname}/${item.userid}`} className="text-white">Edit</Link></button>
                                                                 </td>

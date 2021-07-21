@@ -101,7 +101,7 @@ function Home() {
                                     <h5 className="ml-2 text-dark">wallet</h5>
                                     <div style={{ width: '100%', height: '1px', backgroundColor: '#cacaca', marginBottom: '30px' }}></div>
                                     <h6 className="text-primary mb-5 ml-2">Registered on : {userdetails.createdAt}</h6>
-
+                                    <h6 className="text-dark mb-5 ml-2">referral link <span className="text-primary">https://cent-coin.com/signup/{user}</span></h6>
                                     <div className="btn-group w-100 pl-2 pr-2">
                                         <button className="btn btn-primary col"><a href="/dashboard/deposit" className="text-white">Deposit</a></button>
                                         <button className="btn btn-danger col"><a href="/dashboard/withdraw" className="text-white">Withdraw</a></button>
