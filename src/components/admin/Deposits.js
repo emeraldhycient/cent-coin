@@ -73,7 +73,7 @@ function Deposits() {
 
         axios({
             method: 'POST',
-            url: 'http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/makedeposit.php',
+            url: 'https://cent-coin.com/api/admin/makedeposit.php',
             data: formdata
         })
             .then(res => {
@@ -91,7 +91,7 @@ function Deposits() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/packages.php?all=all')
+        axios.get('https://cent-coin.com/api/admin/packages.php?all=all')
             .then(res => {
                 //console.log(res);
                 let mod = Object.values(res.data.data)
@@ -100,7 +100,7 @@ function Deposits() {
             .catch(err => notify(err.response.data.message))
 
 
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/deposits.php')
+        axios.get('https://cent-coin.com/api/admin/deposits.php')
             .then(res => {
                 //console.log(res);
                 let mod = Object.values(res.data.data.deposits)
@@ -216,7 +216,6 @@ function Deposits() {
                                                     <th className="text-dark">Amount</th>
                                                     <th className="text-dark">status</th>
                                                     <th className="text-dark">Date</th>
-                                                    <th className="text-primary">Edit Status<i className="fa fa-edit ml-1"></i></th>
                                                 </tr>
                                                 {
                                                     deposits ?
@@ -229,16 +228,7 @@ function Deposits() {
                                                                 <td><i className="fa fa-dollar mr-1"></i>{item.amount}</td>
                                                                 <td>{item.status}</td>
                                                                 <td><i className="fa fa-hourglass-half mr-1"></i>{item.createdAt}</td>
-                                                                <td>
-                                                                    <form action="" className="form-group">
-                                                                        <input type="hidden" id="memberid" value='1' />
-                                                                        <select name="" id="" className="opt-group">
-                                                                            <option value="suspened">Suspend</option>
-                                                                            <option value="Active">Activate</option>
-                                                                        </select>
-                                                                        <button className="btn badge badge-primary ml-1"> Update</button>
-                                                                    </form>
-                                                                </td>
+
                                                             </tr>
                                                         ))
                                                         :

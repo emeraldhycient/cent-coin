@@ -12,8 +12,8 @@ export default function Header() {
                     Cent Coin
                 </h5>*/}
                 <img src={cover} alt="" className="navbar-brand offset-md-2 offset-sm-2" style={{ width: '130px', height: '70px' }} />
-                <button className="navbar-toggler text-dark bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                <button className="navbar-toggler text-white bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i className='fa fa-bars '></i>
                 </button>
                 <div className="collapse navbar-collapse offset-md-5" id="navbarNav" style={{ backgroundColor: '#000' }}>
                     <ul className="navbar-nav">

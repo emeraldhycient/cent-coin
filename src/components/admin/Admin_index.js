@@ -35,7 +35,7 @@ function Admin_index() {
 
     const gettotalusers = () => {
 
-        axios.get(' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/totalusers.php')
+        axios.get('https://cent-coin.com/api/admin/totalusers.php')
             .then(res => {
                 //console.log(res);
                 settotaluser(res.data.data.users)
@@ -45,7 +45,7 @@ function Admin_index() {
 
     const getdeposit = () => {
 
-        axios.get(' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/totaldeposits.php')
+        axios.get('https://cent-coin.com/api/admin/totaldeposits.php')
             .then(res => {
                 //console.log(res);
                 settotaldeposit(res.data.data.amount)

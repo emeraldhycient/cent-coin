@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom"
+
 
 import ProtectedRoutes from "./components/auth/ProtectedRoute";
 import Protectadmin from "./components/auth/Protectadmin";
@@ -38,6 +39,7 @@ import Admin_settings from './components/admin/Admin_settings'
 
 
 function App() {
+
   return (
     <Router>
       <Switch>
@@ -57,8 +59,8 @@ function App() {
 
         {/* admin dashboard */}
         <Protectadmin path='/admin/' exact component={Admin_index} />
-        <Protectadmin path='/admin/members' component={Members} />
-        <Protectadmin path='/admin/members/:id' component={Members} />
+        <Protectadmin exact path='/admin/members' component={Members} />
+        <Protectadmin exact path='/admin/members/:userid' component={Members} />
         <Protectadmin path='/admin/deposits' component={Deposits} />
         <Protectadmin path='/admin/withdrawals' component={Withdrawals} />
         <Protectadmin path='/admin/packages' component={Packages} />

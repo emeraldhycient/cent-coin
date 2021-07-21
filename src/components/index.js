@@ -39,7 +39,7 @@ function Index() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/packages.php?all=all')
+        axios.get('https://cent-coin.com/api/admin/packages.php?all=all')
             .then(res => {
                 setplans(res.data.data)
             })

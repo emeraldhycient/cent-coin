@@ -53,7 +53,7 @@ function Deposit() {
 
     }
 
-    axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/user/paymentmethods.php')
+    axios.get('https://cent-coin.com/api/user/paymentmethods.php')
         .then(res => {
             //console.log(res);
             setpaymentmethods(res.data.data)

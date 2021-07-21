@@ -73,7 +73,7 @@ function Settings() {
 
         axios({
             method: 'POST',
-            url: ' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/auth/updatesettings.php',
+            url: 'https://cent-coin.com/api/auth/updatesettings.php',
             data: formdata
         })
             .then(e => {
@@ -95,7 +95,7 @@ function Settings() {
         formdata.append('userid', user)
         axios({
             method: 'POST',
-            url: ' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/user/userdetails.php',
+            url: 'https://cent-coin.com/api/user/userdetails.php',
             data: formdata
         }).then(res => {
             setuserdetails(res.data.data.user)

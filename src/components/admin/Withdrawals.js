@@ -56,7 +56,7 @@ function Withdrawal() {
         formdata.append('status', 'processed')
         axios({
             method: 'POST',
-            url: 'http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/withdrawal.php',
+            url: 'https://cent-coin.com/api/admin/withdrawal.php',
             data: formdata
         })
             .then(res => {
@@ -68,14 +68,14 @@ function Withdrawal() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/withdrawal.php?all=all')
+        axios.get('https://cent-coin.com/api/admin/withdrawal.php?all=all')
             .then(res => {
                 let mod = Object.values(res.data.data.withdrawal)
                 setwithdrawals(mod)
             })
             .catch(err => notify(err.response.data.message))
 
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/withdrawal.php?unprocessed=all')
+        axios.get('https://cent-coin.com/api/admin/withdrawal.php?unprocessed=all')
             .then(res => {
                 let mod = Object.values(res.data.data.withdrawal)
                 setunprocessed(mod)
@@ -114,10 +114,7 @@ function Withdrawal() {
                                             <tbody>
                                                 <tr>
                                                     <th className="text-dark">userid</th>
-                                                    <th className="text-dark">bankname</th>
-                                                    <th className="text-dark">routing</th>
-                                                    <th className="text-dark">account-name</th>
-                                                    <th className="text-dark">account-number</th>
+                                                    <th className="text-dark">wallet</th>
                                                     <th className="text-dark">amount</th>
                                                     <th className="text-dark">date</th>
                                                     <th className="text-dark">action</th>
@@ -130,10 +127,7 @@ function Withdrawal() {
                                                                 <td>
                                                                     <h5 className="mb-0">{withdrawal.userid}</h5>
                                                                 </td>
-                                                                <td>{withdrawal.bankname}</td>
-                                                                <td>{withdrawal.routing}</td>
-                                                                <td>{withdrawal.accountname}</td>
-                                                                <td>{withdrawal.accountnumber}</td>
+                                                                <td>{withdrawal.wallet}</td>
                                                                 <td><i className="fa fa-dollar mr-1"></i>{withdrawal.amount}</td>
                                                                 <td>{withdrawal.createdAt}</td>
                                                                 <td><span className="badge badge-success" onClick={e => processWithdrawal(withdrawal.userid, withdrawal.amount)}>Process</span></td>
@@ -162,10 +156,7 @@ function Withdrawal() {
                                             <tbody>
                                                 <tr>
                                                     <th className="text-dark">userid</th>
-                                                    <th className="text-dark">bankname</th>
-                                                    <th className="text-dark">routing</th>
-                                                    <th className="text-dark">account-name</th>
-                                                    <th className="text-dark">account-number</th>
+                                                    <th className="text-dark">wallet</th>
                                                     <th className="text-dark">amount</th>
                                                     <th className="text-dark">status</th>
                                                     <th className="text-dark">date</th>
@@ -177,7 +168,7 @@ function Withdrawal() {
                                                                 <td>
                                                                     <h5 className="mb-0">{withdrawal.userid}</h5>
                                                                 </td>
-                                                                <td>{withdrawal.bankname}</td>
+                                                                <td>{withdrawal.wallet}</td>
                                                                 <td>{withdrawal.routing}</td>
                                                                 <td>{withdrawal.accountname}</td>
                                                                 <td>{withdrawal.accountnumber}</td>

@@ -67,7 +67,7 @@ function Admin_settings() {
 
         axios({
             method: 'POST',
-            url: ' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/auth/updatesettings.php',
+            url: 'https://cent-coin.com/api/auth/updatesettings.php',
             data: formdata
         })
             .then(e => {

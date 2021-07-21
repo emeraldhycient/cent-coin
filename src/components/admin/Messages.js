@@ -45,7 +45,7 @@ function Messages() {
 
 
     useEffect(() => {
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/messages.php')
+        axios.get('https://cent-coin.com/api/admin/messages.php')
             .then(res => {
                 // console.log(res);
                 let mod = Object.values(res.data.data)

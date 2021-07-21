@@ -10660,6 +10660,11 @@ tar@^6.0.2:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
+tawkto-react@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tawkto-react/-/tawkto-react-2.0.3.tgz#e644b6c0aa30f0c8dd31a64b858fa8e3302d9ff8"
+  integrity sha512-KnTMAEA/DJNKlWNa4T7uB6+EzvgTXaEagJRGf7hPBTzMyGHARQQl4LRUi0rLPsss5dDW5ZigiORpmwHCRxk4VA==
+
 temp-dir@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-1.0.0.tgz#0a7c0ea26d3a39afa7e0ebea9c1fc0bc4daa011d"

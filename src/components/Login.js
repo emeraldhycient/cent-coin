@@ -52,7 +52,7 @@ function Login() {
 
         axios({
             method: 'POST',
-            url: ' http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/auth/login.php',
+            url: 'https://cent-coin.com/api/auth/login.php',
             data: formdata
         })
             .then(res => {

@@ -64,7 +64,7 @@ function Signup() {
 
         axios({
             method: 'POST',
-            url: 'http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/user/createaccount.php',
+            url: 'https://cent-coin.com/api/user/createaccount.php',
             data: formdata
         })
             .then(res => {
@@ -106,7 +106,7 @@ function Signup() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/packages.php?all=all')
+        axios.get('https://cent-coin.com/api/admin/packages.php?all=all')
             .then(res => {
                 //console.log(res);
                 let mod = Object.values(res.data.data)

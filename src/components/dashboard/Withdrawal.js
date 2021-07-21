@@ -37,7 +37,7 @@ function Withdrawal() {
     });
 
 
-    const [bankname, setbankname] = useState('')
+    const [wallet, setwallet] = useState('')
     const [accountname, setaccountname] = useState('')
     const [accountnumber, setaccountnumber] = useState('')
     const [routingnumber, setroutingnumber] = useState('')
@@ -65,15 +65,12 @@ function Withdrawal() {
 
         const formdata = new FormData();
         formdata.append('userid', sessionStorage.getItem('user'))
-        formdata.append('bankname', bankname)
-        formdata.append('accountname', accountname)
-        formdata.append('accountnumber', accountnumber)
-        formdata.append('routingnumber', routingnumber)
+        formdata.append('wallet', wallet)
         formdata.append('amount', amount)
 
         axios({
             method: 'POST',
-            url: 'http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/user/withdrawal.php',
+            url: 'https://cent-coin.com/api/user/withdrawal.php',
             data: formdata
         })
             .then(res => {
@@ -128,52 +125,7 @@ function Withdrawal() {
                                                     <div className="input-group-prepend">
                                                         <span className="input-group-text bg-dark" id="basic-addon1"><i className="fa fa-university text-white"></i></span>
                                                     </div>
-                                                    <input type="text" className="form-control" onChange={e => setbankname(e.target.value)} value={bankname} placeholder="Bank Name" aria-label="Bank Name" aria-describedby="basic-addon1" required />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row ml-md-5 mt-2">
-                                            <div className="col-md-4">
-                                                <h6 className="text-muted">Account Name</h6>
-                                                <small className="text-muted">Please double check account name</small>
-                                            </div>
-                                            <div className="col-md-7">
-                                                <div className="input-group mb-4">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text bg-dark" id="basic-addon1"><i className="fa fa-user text-white"></i></span>
-                                                    </div>
-                                                    <input type="text" className="form-control" value={accountname} placeholder="Bank Account Name" onChange={e => setaccountname(e.target.value)} aria-label="Bank Account Name" aria-describedby="basic-addon1" required />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row ml-md-5 mt-2">
-                                            <div className="col-md-4">
-                                                <h6 className="text-muted">Account Number</h6>
-                                                <small className="text-muted">Please double check this account number</small>
-                                            </div>
-                                            <div className="col-md-7">
-                                                <div className="input-group mb-4">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text bg-dark" id="basic-addon1"><i className="fa fa-credit-card text-white"></i></span>
-                                                    </div>
-                                                    <input type="text" className="form-control" onChange={e => setaccountnumber(e.target.value)} value={accountnumber} placeholder="Bank Account Number" aria-label="Bank Account Number" aria-describedby="basic-addon1" required />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row ml-md-5 mt-2">
-                                            <div className="col-md-4">
-                                                <h6 className="text-muted">Routing Number</h6>
-                                                <small className="text-muted">Please double check this Routing number</small>
-                                            </div>
-                                            <div className="col-md-7">
-                                                <div className="input-group mb-4">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text bg-dark" id="basic-addon1"><i className="fa fa-credit-card text-white"></i></span>
-                                                    </div>
-                                                    <input type="text" className="form-control" onChange={e => setroutingnumber(e.target.value)} value={routingnumber} placeholder="Bank Routing Number" aria-label="Bank Account Number" aria-describedby="basic-addon1" required />
+                                                    <input type="text" className="form-control" onChange={e => setwallet(e.target.value)} value={wallet} placeholder="Bank Name" aria-label="Bank Name" aria-describedby="basic-addon1" required />
                                                 </div>
                                             </div>
                                         </div>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     useRouteMatch,
 } from "react-router-dom";
+
 
 import Header from './Header'
 import Footer from './Footer'
@@ -41,6 +42,9 @@ function Faq() {
         }))
 
     }
+
+
+
 
     return (
         <>

@@ -61,7 +61,7 @@ function Payment_settings() {
 
     const paymentmethods = () => {
 
-        axios.get('http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/paymentmethods.php?all=all')
+        axios.get('https://cent-coin.com/api/admin/paymentmethods.php?all=all')
             .then(res => {
                 if (res.data.status === 'success') {
                     let data = res.data.data
@@ -94,7 +94,7 @@ function Payment_settings() {
 
         axios({
             method: 'POST',
-            url: 'http://localhost/rald/cent-coin(btc_website)/centcoin-api/api/admin/paymentmethods.php',
+            url: 'https://cent-coin.com/api/admin/paymentmethods.php',
             data: formdata
         }).then((res) => {
             notify(res.data.message)
